@@ -1,0 +1,94 @@
+<!-- page - 2 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    a {
+        text-decoration: none;
+    }
+    select{
+        background-color: transparent;
+        color: white;
+        padding: 10px;
+        margin: 20px 0;
+    }
+    select option{
+        color: black;
+    }
+</style>
+
+<body>
+
+    <section>
+        <div class="container">
+            <div class="v-center">
+                <div class="box text-center p-5">
+                    <i class="fa-solid fa-lock pb-3"></i>
+                    <h2>ADMIN PANEL</h2>
+                    <div class="user">
+                        <i class="fa-solid fa-envelope pe-2"></i>
+                        <input id="email" class="p-2 text-white" type="text" placeholder="Email">
+                    </div>
+                    <div class="user">
+                        <i class="fa-solid fa-unlock pe-2"></i>
+                        <input id="password" class="p-2 text-white" type="password" placeholder="Password">
+                    </div>
+                    <select id="role">
+                        <option>---  Select Role  ---</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">user</option>
+                    </select>
+                    <br>
+                    <button class="mt-3" onclick="save()">Log In</button>
+                    <a href="register.html" class="d-block mt-4 text-white">Don't Have an Account ?<b> Sign Up</b></a>
+                    <a href="forgot.html" onclick="forgot()" class="d-block mt-4 text-white">Forgot Password ?</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        let save = () => {
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let val = JSON.parse(localStorage.getItem('user'));
+            let role = document.getElementById('role').value;
+
+            let ans = val.filter((v) => {
+                return v.email == email;
+            })
+
+            if (ans.length != 0) {
+                if (ans[0].password == password) {
+                    if (ans[0].role == role) {
+                        localStorage.setItem('checkuser', JSON.stringify(ans));
+                        window.location.href = "dashboard.html";
+                    }
+                    else{
+                        alert("Check role!")
+                    }
+                }
+                else {
+                    alert("Check Your Password");
+                }
+            }
+            else {
+                alert("Check Your Email");
+            }
+        }
+    </script>
+
+
+
+</body>
+
+</html>

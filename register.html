@@ -1,0 +1,128 @@
+<!-- page - 1 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+
+
+<body>
+
+    <section>
+        <div class="container">
+            <div class="v-center">
+                <div class="box text-center p-5">
+                    <i class="fa-solid fa-lock pb-3"></i>
+                    <h2>ADMIN PANEL</h2>
+                    <div class="user">
+                        <i class="fa-solid fa-user pe-2"></i>
+                        <input id="name" class="p-2" type="text" placeholder="username">
+                    </div>
+                    <div class="user">
+                        <i class="fa-solid fa-envelope pe-2"></i>
+                        <input id="email" class="p-2" type="email" placeholder="Email">
+                    </div>
+                    <div class="user">
+                        <i class="fa-solid fa-unlock pe-2"></i>
+                        <input id="password" class="p-2" type="password" placeholder="Password">
+                    </div>
+                    <div class="user">
+                        <i class="fa-solid fa-unlock pe-2"></i>
+                        <input id="cpassword" class="p-2" type="password" placeholder="Confirm Password">
+                    </div>
+                    <button class="mt-3" onclick="save()">Log In</button>
+                    <a href="login.html" class="d-block mt-4 text-white">Already Have an Account?</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        let save = () => {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let cpassword = document.getElementById('cpassword').value;
+
+            if (!name) {
+                alert("Enter your name");
+                return false;
+            }
+
+            if (!email) {
+                alert("Enter your email");
+                return false;
+            }
+
+            if (!password) {
+                alert("Enter your password");
+                return false;
+            }
+
+            if (!cpassword) {
+                alert("Enter your confirm password");
+                return false;
+            }
+
+            if (password == cpassword) {
+
+                let val = JSON.parse(localStorage.getItem('user'));
+                if (val && val.some(user => user.email === email)) {
+                    alert("User already registered!");
+                    return false;
+                }
+                
+                let data = [
+                    {
+                        userid : 1,
+                        name : 'Hemanshi Bokha',
+                        email : 'hemanshibokha@gmail.com',
+                        password : 'h@123',
+                        role : 'admin'
+                    }
+                ];
+
+                let obj = {
+                    userid: Math.floor(Math.random() * 100),
+                    name: name,
+                    email: email,
+                    password: password,
+                    role : 'user'
+                }
+
+                if (JSON.parse(localStorage.getItem('user')) === null || JSON.parse(localStorage.getItem('user')) === undefined) {
+                    data.push(obj);
+                    localStorage.setItem('user', JSON.stringify(data));
+                }
+                else {
+                    let val = JSON.parse(localStorage.getItem('user'));
+                    val.push(obj);
+                    localStorage.setItem('user', JSON.stringify(val));
+                }
+
+                alert("User Created");
+                window.location.href = "login.html";
+
+            }
+            else {
+                alert("password ans confirm password are not match!");
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

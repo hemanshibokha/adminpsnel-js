@@ -1,0 +1,51 @@
+<!-- page - 4 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Page</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+
+<body>
+
+    <section>
+        <div class="container">
+            <div class="v-center">
+                <div class="box text-center p-5">
+                    <i class="fa-solid fa-lock pb-3"></i>
+                    <h2>ADMIN PANEL</h2>
+                    <br>
+                    <div class="user">
+                        <p style="font-size: 18px; display: inline;">Hear is Your OTP :- <div id="otp" style="display: inline; font-size: 20px;"></div> </p>
+                       
+                    </div>
+                    <button class="mt-3" onclick="next()">Next</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+
+        let Userotp = JSON.parse(localStorage.getItem('userotp'));
+        let otpElement = document.getElementById('otp').innerHTML = Userotp.userotp;
+
+        let next = () => {
+            window.location.href = "enterotp.html";
+        }
+       
+    </script>
+
+</body>
+
+</html>

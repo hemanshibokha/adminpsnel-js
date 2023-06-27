@@ -1,0 +1,64 @@
+<!-- page - 4 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Page</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+
+<body>
+
+    <section>
+        <div class="container">
+            <div class="v-center">
+                <div class="box text-center p-5">
+                    <i class="fa-solid fa-lock pb-3"></i>
+                    <h2>ADMIN PANEL</h2>
+                    <div class="user">
+                        <i class="fa-solid fa-envelope pe-2"></i>
+                        <input id="useremail" class="p-2 text-white" type="text" placeholder="Email">
+                    </div>
+                    <button class="mt-3" onclick="getotp()">Get OTP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        let getotp = () => {
+            let useremail = document.getElementById('useremail').value;
+            let alluser = JSON.parse(localStorage.getItem('user'));
+
+            let ans = alluser.filter((v) => {
+                return v.email == useremail;
+            })
+
+            if (ans.length != 0) {
+                let Otp = Math.floor(Math.random() * 1000000);
+                let obj = {
+                    userotp: Otp,
+                    email: ans[0].email
+                }
+                localStorage.setItem('userotp', JSON.stringify(obj));
+                window.location.href = "getotp.html";
+            }
+            else {
+                alert("Check Your Email");
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
